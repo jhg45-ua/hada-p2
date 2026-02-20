@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Barco.cs" />
     <Compile Include="Coordenada.cs" />
     <Compile Include="Eventos.cs" />
     <Compile Include="Game.cs" />
