@@ -75,16 +75,20 @@ namespace Hada
                 {
                     output += "[" + CoordenadaBarco.ElementAt(i).Key.ToString() + " :" + Nombre + "]";
                 }
+
+                return output;
             }
             else
             {
-                 String output = "[" + Nombre + "] - Daños :[" + NumDanyos + "] - HUNDIDO: [FALSE] - COORDENADAS: ";
+                String output = "[" + Nombre + "] - Daños :[" + NumDanyos + "] - HUNDIDO: [FALSE] - COORDENADAS: ";
+
                 for (int i = 0; i < CoordenadaBarco.Count; i++)
                 {
                     output += "[" + CoordenadaBarco.ElementAt(i).Key.ToString() + " :" + CoordenadaBarco.ElementAt(i).Value + "]";
                 }
+
+                return output;
             }
-             return "";
         }
     }
 }
