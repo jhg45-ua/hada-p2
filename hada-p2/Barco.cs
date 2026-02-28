@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Hada
 {
-    internal class Barco
+    public class Barco
     { //aqui esta el codigo, estte es mi trabajo, os dejo el resto
         Dictionary<Coordenada, String> CoordenadaBarco;
         string Nombre;
         int NumDanyos;
 
-        public EventHandler<TocandoArgs> eventoTocado;
+        public EventHandler<TocadoArgs> eventoTocado;
+        public EventHandler<HundidoArgs> eventoHundido;
 
         public Barco(string nombre, int longitud, char orientacion, Coordenada coordenadaInicio)
         {
@@ -46,7 +47,7 @@ namespace Hada
                 
                 if (eventoTocado != null) // Verificar si hay suscriptores antes de invocar el evento
                 {
-                    eventoTocado(this, new TocandoArgs(CoordenadaBarco[c], c));
+                    eventoTocado(this, new TocadoArgs(CoordenadaBarco[c], c));
                 }
 
             }

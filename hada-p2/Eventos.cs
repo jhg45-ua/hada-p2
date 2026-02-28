@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Hada
 {
-    public class TocandoArgs : EventArgs
+    public class TocadoArgs : EventArgs
     {
         public String nombre { get; set; }
         public Coordenada coordenadaImpacto { get; set; }
 
-        public TocandoArgs(String nombre, Coordenada coordenadaImpacto)
+        public TocadoArgs(String nombre, Coordenada coordenadaImpacto)
         {
             this.nombre = nombre;
             this.coordenadaImpacto = coordenadaImpacto;
