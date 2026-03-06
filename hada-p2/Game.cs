@@ -27,7 +27,7 @@ namespace Hada
 
             do {
                 Console.Clear();
-                Console.WriteLine(tablero.DibujarTablero());
+                Console.WriteLine(tablero.ToString());
                 Console.WriteLine("Introduce las coordenadas de tu disparo (fila,columna) o 's' para salir:");
                 string input = Console.ReadLine();
 
