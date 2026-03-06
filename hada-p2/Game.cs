@@ -10,6 +10,11 @@ namespace Hada
     {
         private bool finPartida = false;
 
+        public Game()
+        {
+            gameLoop();
+        }
+
         private void gameLoop()
         {
             // Generamos primero los tres barcos
@@ -18,8 +23,11 @@ namespace Hada
             Barco barco3 = new Barco("SES Escudo del Pueblo", 4, 'v', new Coordenada(1, 3));
 
             Tablero tablero = new Tablero(10, new List<Barco>() { barco1, barco2, barco3 });
+            tablero.eventoFinPartida += cuandoEventoFinPartida;
 
             do {
+                Console.Clear();
+                Console.WriteLine(tablero.DibujarTablero());
                 Console.WriteLine("Introduce las coordenadas de tu disparo (fila,columna) o 's' para salir:");
                 string input = Console.ReadLine();
 
@@ -43,7 +51,6 @@ namespace Hada
                 }
                 Coordenada disparo = new Coordenada(fila, columna);
                 tablero.Disparar(disparo);
-                tablero.eventoFinPartida += cuandoEventoFinPartida;
             } while (!finPartida);
         }
 
