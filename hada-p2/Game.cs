@@ -22,7 +22,7 @@ namespace Hada
             Barco barco2 = new Barco("Destructor Imperial", 4, 'v', new Coordenada(1, 2));
             Barco barco3 = new Barco("SES Escudo del Pueblo", 4, 'v', new Coordenada(1, 3));
 
-            Tablero tablero = new Tablero(10, new List<Barco>() { barco1, barco2, barco3 });
+            Tablero tablero = new Tablero(9, new List<Barco>() { barco1, barco2, barco3 });
             tablero.eventoFinPartida += cuandoEventoFinPartida;
 
             do {
