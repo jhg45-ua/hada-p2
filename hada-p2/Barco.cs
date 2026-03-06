@@ -66,7 +66,7 @@ namespace Hada
             return true;
         }
 
-        String toString()
+        public override String ToString()
         {
             if (hundido())
             {

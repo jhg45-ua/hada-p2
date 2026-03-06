@@ -9,8 +9,27 @@ namespace Hada
     public class Coordenada
     {
         // Atributos
-        public int Fila;
-        public int Columna;
+        private int _fila;
+        public int Fila
+        {
+            get { return _fila; }
+            set
+            {
+                if (value >= 0 && value <= 9) _fila = value;
+                else throw new ArgumentException("La fila debe tener un valor entre 0 y 9.");
+            }
+        }
+
+        private int _columna;
+        public int Columna
+        {
+            get { return _columna; }
+            set
+            {
+                if (value >= 0 && value <= 9) _columna = value;
+                else throw new ArgumentException("La columna debe tener un valor entre 0 y 9.");
+            }
+        }
 
         public Coordenada()
         {
@@ -48,12 +67,15 @@ namespace Hada
                    Columna == coordenada.Columna;
         }
 
+        public bool Equals(Coordenada coordenada)
+        {
+            if (coordenada == null) return false;
+            return this.Fila == coordenada.Fila && this.Columna == coordenada.Columna;
+        }
+
         public override int GetHashCode()
         {
-            int hashCode = 1681403097;
-            hashCode = hashCode * -1521134295 + Fila.GetHashCode();
-            hashCode = hashCode * -1521134295 + Columna.GetHashCode();
-            return hashCode;
+            return this.Fila.GetHashCode() ^ this.Columna.GetHashCode();
         }
     }
 }
