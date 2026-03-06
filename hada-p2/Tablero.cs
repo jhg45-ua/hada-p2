@@ -35,14 +35,14 @@ namespace Hada
 
         public Tablero(int tamTablero, List<Barco> barcos)
         {
-            this.TamTablero = tamTablero;
-            this.coordenadasDisparadas = new List<Coordenada>();
-            this.coordenadasTocadas = new List<Coordenada>();
-            this.barcos = barcos;
-            this.barcosEliminados = new List<Barco>();
-            this.casillasTablero = new Dictionary<Coordenada, string>();
+            TamTablero = tamTablero;
+            coordenadasDisparadas = new List<Coordenada>();
+            coordenadasTocadas = new List<Coordenada>();
+            this.barcos = barcos ?? throw new ArgumentNullException(nameof(barcos));
+            barcosEliminados = new List<Barco>();
+            casillasTablero = new Dictionary<Coordenada, string>();
 
-            foreach (Barco barco in barcos)
+            foreach (Barco barco in this.barcos)
             {
                 barco.eventoTocado += cuandoEventoTocado;
                 barco.eventoHundido += cuandoEventoHundido;
@@ -72,7 +72,7 @@ namespace Hada
 
         private void cuandoEventoTocado(object sender, TocadoArgs e)
         {
-            Console.WriteLine($"TABLERO: Barco {e.nombre} tocado en Coordenada: [{e.coordenadaImpacto}]");
+            Console.WriteLine($"TABLERO: Barco [{e.nombre}] tocado en Coordenada: [{e.coordenadaImpacto}]");
 
             casillasTablero[e.coordenadaImpacto] = e.nombre + "_T";
 
@@ -84,7 +84,7 @@ namespace Hada
 
         private void cuandoEventoHundido(object sender, HundidoArgs e)
         {
-            Console.WriteLine($"TABLERO: Barco {e.nombre} hundido!!");
+            Console.WriteLine($"TABLERO: Barco [{e.nombre}] hundido!!");
 
             Barco barcoHundido = barcos.FirstOrDefault(b => b.Nombre == e.nombre);
             if (barcoHundido != null && !barcosEliminados.Contains(barcoHundido))
@@ -94,10 +94,7 @@ namespace Hada
 
             if (barcosEliminados.Count == barcos.Count)
             {
-                if (eventoFinPartida != null)
-                {
-                    eventoFinPartida(this, EventArgs.Empty);
-                }
+                eventoFinPartida?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -132,6 +129,7 @@ namespace Hada
                 }
                 sb.AppendLine();
             }
+
             return sb.ToString();
         }
 
@@ -144,19 +142,20 @@ namespace Hada
                 sb.AppendLine(barco.ToString());
             }
 
-            sb.Append("Coordenadas disparadas: ");
+            sb.Append("Coordenadas Disparadas: ");
             foreach (Coordenada c in coordenadasDisparadas)
             {
                 sb.Append(c.ToString() + " ");
             }
             sb.AppendLine();
 
-            sb.Append("Coordenadas tocadas: ");
+            sb.Append("Coordenadas Tocadas: ");
             foreach (Coordenada c in coordenadasTocadas)
             {
                 sb.Append(c.ToString() + " ");
             }
-            sb.AppendLine("\n");
+            sb.AppendLine();
+            sb.AppendLine();
 
             sb.Append(DibujarTablero());
 
